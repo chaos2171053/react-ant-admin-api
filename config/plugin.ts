@@ -1,4 +1,4 @@
-import { EggPlugin } from 'egg';
+import { EggPlugin } from "egg";
 
 const plugin: EggPlugin = {
   static: true,
@@ -8,20 +8,24 @@ const plugin: EggPlugin = {
   // },
   sequelize: {
     enable: true,
-    package: 'egg-sequelize',
+    package: "egg-sequelize"
   },
   redis: {
     enable: true,
-    package: 'egg-redis',
+    package: "egg-redis"
   },
   routerPlus: {
     enable: true,
-    package: 'egg-router-plus',
+    package: "egg-router-plus"
   },
   validate: {
     enable: true,
-    package: 'egg-validate',
+    package: "egg-validate"
   },
+  cors: {
+    enable: true,
+    package: "egg-cors"
+  }
 };
 
 export default plugin;

@@ -1,8 +1,8 @@
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
+use `myblog`;
+-- ---------admin_sms_log-------------------
 -- Table structure for admin_sms_log
 -- ----------------------------
 DROP TABLE IF EXISTS `admin_sms_log`;
