@@ -1,3 +1,3 @@
 export default {
-  baseUrl: "/admin"
+  baseUrl: "" // 全局api前缀
 };
