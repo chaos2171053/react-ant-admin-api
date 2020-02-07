@@ -1,16 +1,1 @@
-{
-  "name": "react-ant-admin-api api docs",
-  "version": "0.0.1",
-  "description": "react-ant-admin-api 接口文档",
-  "url": "http://127.0.0.1",
-  "sampleUrl": "http://127.0.0.1",
-  "template": {},
-  "defaultVersion": "0.0.0",
-  "apidoc": "0.3.0",
-  "generator": {
-    "name": "apidoc",
-    "time": "2020-02-06T09:57:19.747Z",
-    "url": "http://apidocjs.com",
-    "version": "0.20.0"
-  }
-}
+{  "name": "react-ant-admin-api api docs",  "version": "0.0.1",  "description": "react-ant-admin-api 接口文档",  "url": "http://127.0.0.1",  "sampleUrl": "http://127.0.0.1",  "template": {},  "defaultVersion": "0.0.0",  "apidoc": "0.3.0",  "generator": {    "name": "apidoc",    "time": "2020-02-07T10:10:46.028Z",    "url": "http://apidocjs.com",    "version": "0.17.7"  }}
