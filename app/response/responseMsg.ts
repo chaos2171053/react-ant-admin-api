@@ -21,5 +21,6 @@ export enum ApiResponseMsg {
   SMS_SND_ERROR = "发送失败，请联系管理员",
 
   // 文章
-  ARTICLE_TYPE_EXISTED = "文章类别已存在"
+  ARTICLE_TYPE_EXISTED = "文章类别已存在",
+  ARTICLE_TYPE_NOT_FOUND = "文章类别不存在"
 }

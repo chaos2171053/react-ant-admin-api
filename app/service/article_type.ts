@@ -3,8 +3,10 @@ import SqlUtils from "../utils/sql";
 
 import BaseService from "../core/service";
 import { ArticleType } from "../model/article_type";
+import { ArticleTypeSearchParams } from "../controller/article_type";
+import { Op } from "sequelize";
 
-export default class ArticleService extends BaseService<ArticleType> {
+export default class ArticleTypeService extends BaseService<ArticleType> {
   constructor(ctx: Context) {
     super(ctx);
     this.model = ctx.model.ArticleType;
@@ -22,5 +24,16 @@ export default class ArticleService extends BaseService<ArticleType> {
       return articleType.get({ plain: true }) as ArticleType;
     }
     return null;
+  }
+
+  public async findList(params: ArticleTypeSearchParams) {
+    let query: ArticleTypeSearchParams = {};
+
+    if (params.name) {
+      query.name = {
+        [Op.like]: `%${params.name}%`
+      };
+    }
+    return this.findListByKey(query, params);
   }
 }

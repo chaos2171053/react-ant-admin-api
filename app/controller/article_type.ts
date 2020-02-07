@@ -3,16 +3,24 @@ import { ApiResponseCode } from "../response/responseCode";
 import { ApiResponseMsg } from "../response/responseMsg";
 import { ArticleType } from "../model/article_type";
 
+export interface ArticleTypeSearchParams {
+  name?: any;
+  page?: number;
+  size?: number;
+}
+export interface ArticleTypeParams {
+  id: number;
+}
 class ArticleTypeController extends Controller {
-  // public async queryList() {
-  //     const { ctx } = this;
+  public async queryList() {
+    const { ctx } = this;
 
-  //     const query: UserSearchParams = ctx.query;
+    const query: ArticleTypeSearchParams = ctx.query;
 
-  //     const data = await ctx.service.user.findList(query);
+    const data = await ctx.service.articleType.findList(query);
 
-  //     ctx.success(data);
-  // }
+    ctx.success(data);
+  }
 
   public async create() {
     const { ctx } = this;
@@ -46,112 +54,99 @@ class ArticleTypeController extends Controller {
 
     ctx.fail();
   }
+  public async queryArticleType() {
+    const { ctx } = this;
 
-  // public async updateUser() {
-  //     const { ctx } = this;
+    ctx.validate(
+      {
+        id: /\d+/
+      },
+      ctx.params
+    );
 
-  //     ctx.validate({
-  //         id: "number",
-  //         name: "string",
-  //         account: "string",
-  //         mobile: "string",
-  //         roleId: "number",
-  //         status: "number"
-  //     });
+    const { id }: ArticleTypeParams = ctx.params;
 
-  //     const user = ctx.request.body as User;
+    const articleType = await ctx.service.articleType.findById(id);
+    if (!articleType) {
+      return ctx.fail(
+        ApiResponseCode.NOT_FOUND,
+        ApiResponseMsg.ARTICLE_TYPE_NOT_FOUND
+      );
+    }
 
-  //     const userData: User | null = await ctx.service.user.findById(user.id);
+    ctx.success(articleType);
+  }
 
-  //     if (!userData) {
-  //         return ctx.fail(
-  //             ApiResponseCode.USER_NOT_FOUND,
-  //             ApiResponseMsg.USER_NOT_FOUND
-  //         );
-  //     }
+  public async updateArticleType() {
+    const { ctx } = this;
+    const { id }: ArticleTypeParams = ctx.params;
+    ctx.validate(
+      {
+        id: "string",
+        name: "string",
+        icon: "string"
+      },
+      {
+        id,
+        ...ctx.request.body
+      }
+    );
 
-  //     user.password = encodeUserPwd(user.password);
+    const articleType = ctx.request.body as ArticleType;
 
-  //     const docs = await ctx.service.user.updateById(user, user.id);
+    const articleTypeData: ArticleType | null = await ctx.service.articleType.findById(
+      id
+    );
 
-  //     if (docs) {
-  //         return ctx.success();
-  //     }
+    if (!articleTypeData) {
+      return ctx.fail(
+        ApiResponseCode.NOT_FOUND,
+        ApiResponseMsg.ARTICLE_TYPE_NOT_FOUND
+      );
+    }
 
-  //     ctx.fail();
-  // }
+    const docs = await ctx.service.articleType.updateById(articleType, id);
 
-  // public async removeUser() {
-  //     const { ctx } = this;
+    if (docs) {
+      return ctx.success();
+    }
 
-  //     const params: {
-  //         id: number;
-  //     } = ctx.params;
+    ctx.fail();
+  }
 
-  //     ctx.validate(
-  //         {
-  //             id: /\d+/
-  //         },
-  //         params
-  //     );
+  public async removeArticleType() {
+    const { ctx } = this;
 
-  //     const user: User | null = await ctx.service.user.findById(params.id);
+    const params: {
+      id: number;
+    } = ctx.params;
 
-  //     if (!user) {
-  //         return ctx.fail(
-  //             ApiResponseCode.USER_NOT_FOUND,
-  //             ApiResponseMsg.USER_NOT_FOUND
-  //         );
-  //     }
+    ctx.validate(
+      {
+        id: /\d+/
+      },
+      params
+    );
 
-  //     const docs = await ctx.service.user.removeById(params.id);
+    const articleType: ArticleType | null = await ctx.service.articleType.findById(
+      params.id
+    );
 
-  //     if (docs) {
-  //         return ctx.success();
-  //     }
+    if (!articleType) {
+      return ctx.fail(
+        ApiResponseCode.NOT_FOUND,
+        ApiResponseMsg.ARTICLE_TYPE_NOT_FOUND
+      );
+    }
 
-  //     ctx.fail();
-  // }
+    const docs = await ctx.service.articleType.removeById(params.id);
 
-  // public async updateUserPwd() {
-  //     const { ctx } = this;
+    if (docs) {
+      return ctx.success();
+    }
 
-  //     ctx.validate({
-  //         mobile: /\d{11}/,
-  //         code: /\d{6}/,
-  //         password: "string"
-  //     });
-
-  //     const data: UpdateUserPwdBody = ctx.request.body;
-
-  //     const code = await ctx.service.sms.findCodeByMobileAndCode(
-  //         data.mobile,
-  //         data.code
-  //     );
-
-  //     if (!code) {
-  //         return ctx.fail(ApiResponseCode.PARAMS_ERROR, ApiResponseMsg.CODE_ERROR);
-  //     }
-
-  //     const user = await ctx.service.user.findUserByMobile(data.mobile);
-
-  //     if (!user) {
-  //         return ctx.fail(
-  //             ApiResponseCode.USER_NOT_FOUND,
-  //             ApiResponseMsg.USER_NOT_FOUND
-  //         );
-  //     }
-
-  //     const pwd = encodeUserPwd(data.password);
-
-  //     const docs = await ctx.service.user.updateById({ password: pwd }, user.id);
-
-  //     if (docs) {
-  //         return ctx.success();
-  //     }
-
-  //     ctx.fail();
-  // }
+    ctx.fail();
+  }
 }
 
 export default ArticleTypeController;
