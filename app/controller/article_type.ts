@@ -82,7 +82,7 @@ class ArticleTypeController extends Controller {
     const { id }: ArticleTypeParams = ctx.params;
     ctx.validate(
       {
-        id: "string",
+        id: "number",
         name: "string",
         icon: "string"
       },
