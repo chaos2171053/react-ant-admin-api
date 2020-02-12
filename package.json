@@ -10,7 +10,7 @@
   "scripts": {
     "start": "npm run ci && egg-scripts start --daemon --title=react-ant-admin-api",
     "stop": "egg-scripts stop --title=react-ant-admin-api",
-    "dev": "egg-bin dev",
+    "dev": "egg-bin dev --port=7002",
     "debug": "egg-bin debug",
     "test-local": "egg-bin test",
     "test": "npm run lint -- --fix && npm run test-local",

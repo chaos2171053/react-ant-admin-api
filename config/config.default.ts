@@ -18,7 +18,7 @@ export default () => {
 
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
-  config.keys = "_1554196283322_156_xxx";
+  config.keys = "_1554196283322_156_chaos";
 
   config.cluster = {
     listen: {
@@ -92,10 +92,10 @@ export default () => {
 
   config.oss = {
     qiniu: {
-      accessKey: "xxx",
-      secretKey: "xxxx",
-      scope: "xxxx",
-      host: "xxxx"
+      accessKey: "MhV0vpgchc_fpT-h51ErOT9j-Y4gKFzAIGkQfn3g",
+      secretKey: "gIya7VYQ2-gPuCun7143i50eJgIVmaG1jeT8tzPW",
+      scope: "buduangeng365",
+      host: "http://cdn.buduangeng365.cn"
     },
     local: {
       prefix: "/public/image",

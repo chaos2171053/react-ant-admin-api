@@ -1,6 +1,6 @@
-import { Context, Service } from 'egg';
-import qiniu = require('qiniu');
-import { QiniuConfig } from '../../typings';
+import { Context, Service } from "egg";
+import qiniu = require("qiniu");
+import { QiniuConfig } from "../../typings";
 
 interface ResponseData {
   url: string;
@@ -33,15 +33,15 @@ class QiniuService extends Service {
 
     this.instance = new qiniu.auth.digest.Mac(
       option.accessKey,
-      option.secretKey,
+      option.secretKey
     );
 
     this.token = new qiniu.rs.PutPolicy({
-      scope: option.scope,
+      scope: option.scope
     }).uploadToken(this.instance);
 
     const config = new qiniu.conf.Config() as any;
-    config.zone = qiniu.zone.Zone_z0;
+    config.zone = qiniu.zone.Zone_z2; // 华南地区
 
     this.uploader = new qiniu.form_up.FormUploader(config);
     this.extra = new qiniu.form_up.PutExtra();
@@ -50,7 +50,7 @@ class QiniuService extends Service {
   public async upload(fileName: string, path: string): Promise<ResponseData> {
     return new Promise((resolve, reject) => {
       if (!this.option) {
-        reject(new Error('qiniu config not found'));
+        reject(new Error("qiniu config not found"));
       }
 
       this.uploader.putFile(
@@ -60,21 +60,21 @@ class QiniuService extends Service {
         this.extra,
         (err: any, response: any, responseData: QiniuResponse) => {
           if (err) {
-            reject(new Error('qiniu upload error'));
+            reject(new Error(`qiniu upload error:${err}`));
           }
 
-          this.ctx.logger.info('qiniu uplaod repsponse', response);
+          this.ctx.logger.info("qiniu uplaod repsponse", response);
 
           if (responseData.statusCode === 200) {
             resolve({
               url: this.option
-                ? this.option.host + '/' + responseData.data.key
-                : '',
+                ? this.option.host + "/" + responseData.data.key
+                : ""
             });
           } else {
-            reject(new Error('qiniu upload error'));
+            reject(new Error("qiniu upload error"));
           }
-        },
+        }
       );
     });
   }
