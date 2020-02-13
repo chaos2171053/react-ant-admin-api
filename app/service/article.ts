@@ -34,6 +34,9 @@ export default class ArticleService extends BaseService<ArticleProps> {
         [Op.like]: `%${params.title}%`
       };
     }
+    if (params.type_id) {
+      query.type_id = params.type_id;
+    }
     return this.findListByKey(query, params);
   }
 }
