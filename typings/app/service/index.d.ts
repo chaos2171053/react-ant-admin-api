@@ -3,6 +3,7 @@
 
 import "egg";
 import ExportAliyun from "../../../app/service/aliyun";
+import ExportArticle from "../../../app/service/article";
 import ExportArticleType from "../../../app/service/article_type";
 import ExportMenu from "../../../app/service/menu";
 import ExportProduct from "../../../app/service/product";
@@ -18,6 +19,7 @@ import ExportUser from "../../../app/service/user";
 declare module "egg" {
   interface IService {
     aliyun: ExportAliyun;
+    article: ExportArticle;
     articleType: ExportArticleType;
     menu: ExportMenu;
     product: ExportProduct;

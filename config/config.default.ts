@@ -50,6 +50,7 @@ export default () => {
     username: "root",
     password: "chaos666",
     database: "myblog",
+    timezone: "+08:00",
     logQueryParameters: true,
     define: {
       timestamps: true,

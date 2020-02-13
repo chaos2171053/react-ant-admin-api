@@ -1,14 +1,16 @@
 import { Model, DataTypes } from "sequelize";
 import { BaseModel, BaseModelProps, BaseModelStatic } from "../core/model";
 import { Context } from "egg";
-// import ArticleType from './article_type'
-export interface Article extends BaseModel, Model {
+import * as moment from "moment";
+//import ArticleType from './article_type'
+export interface ArticleProps extends BaseModel, Model {
   id: number;
   title: string;
   type_id: number;
   introduce: string;
   content: string;
   view_count?: number;
+  publish_at?: string;
 }
 export default (app: Context) => {
   const sequelize = app.model;
@@ -42,6 +44,11 @@ export default (app: Context) => {
         type: DataTypes.INTEGER,
         comment: "浏览次数"
       },
+      publish_at: {
+        type: DataTypes.STRING,
+        defaultValue: moment().format("YYYY-MM-DD HH:mm:ss"),
+        comment: "发布时间"
+      },
 
       // 注入基本model的配置
       ...BaseModelProps
@@ -53,12 +60,13 @@ export default (app: Context) => {
         { fields: ["role_id"] }
       ]
     }
-  ) as BaseModelStatic<Article>;
+  ) as BaseModelStatic<ArticleProps>;
 
   // Article.belongsTo(ArticleType(app), {
-  //     foreignKey: 'type_id',
-  //     targetKey: 'id',
-  //     as: 'type'
+  //   foreignKey: 'type_id',
+  //   targetKey: 'id',
+  //   as: 'type'
   // });
+
   return Article;
 };
