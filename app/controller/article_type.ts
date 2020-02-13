@@ -1,16 +1,14 @@
 import { Controller } from "egg";
 import { ApiResponseCode } from "../response/responseCode";
 import { ApiResponseMsg } from "../response/responseMsg";
-import { ArticleType } from "../model/article_type";
+import { ArticleTypeProps } from "../model/article_type";
 
 export interface ArticleTypeSearchParams {
   name?: any;
   page?: number;
   size?: number;
 }
-export interface ArticleTypeParams {
-  id: number;
-}
+
 class ArticleTypeController extends Controller {
   public async queryList() {
     const { ctx } = this;
@@ -33,9 +31,9 @@ class ArticleTypeController extends Controller {
       }
     });
 
-    const articleType = ctx.request.body as ArticleType;
+    const articleType = ctx.request.body as ArticleTypeProps;
 
-    const hasArticleType: ArticleType | null = await ctx.service.articleType.findArticleByName(
+    const hasArticleType: ArticleTypeProps | null = await ctx.service.articleType.findArticleByName(
       articleType.name
     );
 
@@ -64,7 +62,7 @@ class ArticleTypeController extends Controller {
       ctx.params
     );
 
-    const { id }: ArticleTypeParams = ctx.params;
+    const { id }: ArticleTypeProps = ctx.params;
 
     const articleType = await ctx.service.articleType.findById(id);
     if (!articleType) {
@@ -79,10 +77,10 @@ class ArticleTypeController extends Controller {
 
   public async updateArticleType() {
     const { ctx } = this;
-    const { id }: ArticleTypeParams = ctx.params;
+    const { id }: ArticleTypeProps = ctx.params;
     ctx.validate(
       {
-        id: "number",
+        id: /\d+/,
         name: "string",
         icon: "string"
       },
@@ -92,9 +90,9 @@ class ArticleTypeController extends Controller {
       }
     );
 
-    const articleType = ctx.request.body as ArticleType;
+    const articleType = ctx.request.body as ArticleTypeProps;
 
-    const articleTypeData: ArticleType | null = await ctx.service.articleType.findById(
+    const articleTypeData: ArticleTypeProps | null = await ctx.service.articleType.findById(
       id
     );
 
@@ -128,7 +126,7 @@ class ArticleTypeController extends Controller {
       params
     );
 
-    const articleType: ArticleType | null = await ctx.service.articleType.findById(
+    const articleType: ArticleTypeProps | null = await ctx.service.articleType.findById(
       params.id
     );
 

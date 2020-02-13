@@ -2,17 +2,19 @@ import { Context } from "egg";
 import SqlUtils from "../utils/sql";
 
 import BaseService from "../core/service";
-import { ArticleType } from "../model/article_type";
 import { ArticleTypeSearchParams } from "../controller/article_type";
 import { Op } from "sequelize";
+import { ArticleTypeProps } from "../model/article_type";
 
-export default class ArticleTypeService extends BaseService<ArticleType> {
+export default class ArticleTypeService extends BaseService<ArticleTypeProps> {
   constructor(ctx: Context) {
     super(ctx);
     this.model = ctx.model.ArticleType;
   }
 
-  public async findArticleByName(name: string): Promise<ArticleType | null> {
+  public async findArticleByName(
+    name: string
+  ): Promise<ArticleTypeProps | null> {
     const articleType = await this.ctx.model.ArticleType.findOne({
       where: {
         name
@@ -21,7 +23,7 @@ export default class ArticleTypeService extends BaseService<ArticleType> {
     });
 
     if (articleType) {
-      return articleType.get({ plain: true }) as ArticleType;
+      return articleType.get({ plain: true }) as ArticleTypeProps;
     }
     return null;
   }

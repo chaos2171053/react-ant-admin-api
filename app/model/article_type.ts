@@ -3,7 +3,7 @@ import { Model, DataTypes } from "sequelize";
 import { BaseModel, BaseModelProps, BaseModelStatic } from "../core/model";
 import Article from "./article";
 
-export interface ArticleType extends BaseModel, Model {
+export interface ArticleTypeProps extends BaseModel, Model {
   id: number;
   name: string;
   icon?: string;
@@ -30,7 +30,7 @@ export default (app: Context) => {
     },
     // 注入基本model的配置
     ...BaseModelProps
-  }) as BaseModelStatic<ArticleType>;
+  }) as BaseModelStatic<ArticleTypeProps>;
 
   ArticleType.hasOne(Article(app), {
     foreignKey: "id"
