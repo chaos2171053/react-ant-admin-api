@@ -62,9 +62,9 @@ export default class Redis extends Service {
     );
   }
 
-  public async getMap<T>(key: string): Promise<T | null> {
+  public async getMap<T extends any>(key: string): Promise<T | null> {
     const data = await this.app.redis.hgetall(key);
-    // @ts-ignore
-    return data;
+
+    return data ? (data as T) : null;
   }
 }
