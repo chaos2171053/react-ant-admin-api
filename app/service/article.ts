@@ -35,7 +35,8 @@ export default class ArticleService extends BaseService<ArticleProps> {
           model: this.ctx.model.ArticleType,
           attributes: ["name", "id"],
           required: false,
-          as: "type"
+          as: "type",
+          ...SqlUtils.queryOptions()
         }
       ]
     };
@@ -57,7 +58,8 @@ export default class ArticleService extends BaseService<ArticleProps> {
         };
         const date = formatDate(articleObj.publish_at);
         article.setDataValue("publish_at", date);
-        articleObj.type.name &&
+        articleObj.type &&
+          articleObj.type.name &&
           article.setDataValue("type_name", articleObj.type.name);
       }
     );
