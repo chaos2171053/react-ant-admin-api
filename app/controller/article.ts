@@ -2,6 +2,8 @@ import { Controller } from "egg";
 import { ApiResponseCode } from "../response/responseCode";
 import { ApiResponseMsg } from "../response/responseMsg";
 import { ArticleProps } from "../model/article";
+import { formateDateToDate } from "../utils/date";
+
 export interface ArticleSearchParams {
   title?: any;
   type_id?: number;
@@ -18,7 +20,6 @@ class ArticleController extends Controller {
     const query: ArticleSearchParams = ctx.query;
 
     const data = await ctx.service.article.findList(query);
-
     ctx.success(data);
   }
 
@@ -27,19 +28,19 @@ class ArticleController extends Controller {
 
     ctx.validate({
       title: "string",
-      type_id: /\d+/,
+      type_id: "number",
       introduce: "string",
       content: "string",
       publish_at: {
         type: "string",
-        required: false
+        required: true
       }
     });
 
     let article = ctx.request.body as ArticleProps;
+    article.publish_at = formateDateToDate(article.publish_at);
 
     const docs = await ctx.service.article.createInstance(article);
-
     if (docs) {
       return ctx.success();
     }
@@ -74,9 +75,9 @@ class ArticleController extends Controller {
     const { id }: ArticleParams = ctx.params;
     ctx.validate(
       {
-        id: /\d+/,
+        id: "number",
         title: "string",
-        type_id: /\d+/,
+        type_id: "number",
         introduce: "string",
         content: "string",
         publish_at: {

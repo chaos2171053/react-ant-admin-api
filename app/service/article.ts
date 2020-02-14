@@ -5,7 +5,7 @@ import BaseService from "../core/service";
 import { ArticleProps } from "../model/article";
 import { ArticleSearchParams } from "../controller/article";
 import { Op } from "sequelize";
-import moment = require("moment");
+import { formatDate } from "../utils/date";
 
 export default class ArticleService extends BaseService<ArticleProps> {
   constructor(ctx: Context) {
@@ -40,9 +40,8 @@ export default class ArticleService extends BaseService<ArticleProps> {
     }
     let queryResult = await this.findListByKey(query, params);
     queryResult.list.forEach((article: ArticleProps) => {
-      article.publish_at = moment(article.publish_at).format(
-        "YYYY-MM-DD HH:mm:ss"
-      );
+      const date = formatDate(article.getDataValue("publish_at"));
+      article.setDataValue("publish_at", date);
     });
     return queryResult;
   }

@@ -1,7 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 import { BaseModel, BaseModelProps, BaseModelStatic } from "../core/model";
 import { Context } from "egg";
-import * as moment from "moment";
 //import ArticleType from './article_type'
 export interface ArticleProps extends BaseModel, Model {
   id: number;
@@ -9,8 +8,8 @@ export interface ArticleProps extends BaseModel, Model {
   type_id: number;
   introduce: string;
   content: string;
+  publish_at: Date | string;
   view_count?: number;
-  publish_at?: string;
 }
 export default (app: Context) => {
   const sequelize = app.model;
@@ -45,8 +44,7 @@ export default (app: Context) => {
         comment: "浏览次数"
       },
       publish_at: {
-        type: DataTypes.STRING,
-        defaultValue: moment().format("YYYY-MM-DD HH:mm:ss"),
+        type: DataTypes.DATE,
         comment: "发布时间"
       },
 
