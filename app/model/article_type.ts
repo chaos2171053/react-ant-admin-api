@@ -33,7 +33,7 @@ export default (app: Context) => {
   }) as BaseModelStatic<ArticleTypeProps>;
 
   ArticleType.hasOne(Article(app), {
-    foreignKey: "id"
+    foreignKey: "type_id"
   });
   return ArticleType;
 };

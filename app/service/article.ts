@@ -29,7 +29,16 @@ export default class ArticleService extends BaseService<ArticleProps> {
 
   public async findList(params: ArticleSearchParams) {
     let query: ArticleSearchParams = {};
-
+    const options = {
+      include: [
+        {
+          model: this.ctx.model.ArticleType,
+          attributes: ["name", "id"],
+          required: false,
+          as: "type"
+        }
+      ]
+    };
     if (params.title) {
       query.title = {
         [Op.like]: `%${params.title}%`
@@ -38,11 +47,20 @@ export default class ArticleService extends BaseService<ArticleProps> {
     if (params.type_id) {
       query.type_id = params.type_id;
     }
-    let queryResult = await this.findListByKey(query, params);
-    queryResult.list.forEach((article: ArticleProps) => {
-      const date = formatDate(article.getDataValue("publish_at"));
-      article.setDataValue("publish_at", date);
-    });
+
+    let queryResult = await this.findListByKey(query, params, options);
+
+    queryResult.list.forEach(
+      (article: ArticleProps & { type?: object | string }) => {
+        let articleObj = article.get({ plain: true }) as ArticleProps & {
+          type: { name: string; id: number };
+        };
+        const date = formatDate(articleObj.publish_at);
+        article.setDataValue("publish_at", date);
+        articleObj.type.name &&
+          article.setDataValue("type_name", articleObj.type.name);
+      }
+    );
     return queryResult;
   }
 }

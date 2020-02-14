@@ -1,7 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import { BaseModel, BaseModelProps, BaseModelStatic } from "../core/model";
 import { Context } from "egg";
-//import ArticleType from './article_type'
+import ArticleType from "./article_type";
 export interface ArticleProps extends BaseModel, Model {
   id: number;
   title: string;
@@ -10,6 +10,7 @@ export interface ArticleProps extends BaseModel, Model {
   content: string;
   publish_at: Date | string;
   view_count?: number;
+  type_name?: string;
 }
 export default (app: Context) => {
   const sequelize = app.model;
@@ -50,21 +51,34 @@ export default (app: Context) => {
 
       // 注入基本model的配置
       ...BaseModelProps
-    },
-    {
-      indexes: [
-        { fields: ["mobile"] },
-        { fields: ["account"] },
-        { fields: ["role_id"] }
-      ]
     }
+    // {
+    //   indexes: [
+    //     { fields: ["mobile"] },
+    //   ]
+    // }
   ) as BaseModelStatic<ArticleProps>;
 
-  // Article.belongsTo(ArticleType(app), {
-  //   foreignKey: 'type_id',
-  //   targetKey: 'id',
-  //   as: 'type'
-  // });
+  class ExtendsArticle extends Article<ArticleProps> {
+    id: number;
+    title: string;
+    type_id: number;
+    content: string;
+    introduce: string;
+    view_count: number;
+    publish_at: Date;
+    creator: string;
+    modifier: string;
+    readonly createdAt: Date;
+    readonly updatedAt: Date;
+    static associate() {
+      Article.belongsTo(ArticleType(app), {
+        foreignKey: "type_id",
+        targetKey: "id",
+        as: "type"
+      });
+    }
+  }
 
-  return Article;
+  return ExtendsArticle;
 };
