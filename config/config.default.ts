@@ -4,10 +4,10 @@ import { AliyunSmsConfig, OssConfig } from "../typings";
 import baseConfig from "./index";
 
 const authUrl = () => {
-  const url = ["/user/login", "/user/login-mobile", "/", "/sms"].map(
+  const url = ["/user/login", "/user/login-mobile", "/blog", "/", "/sms"].map(
     api => baseConfig.baseUrl + api
   );
-  return new Set(url);
+  return url;
 };
 
 export default () => {
