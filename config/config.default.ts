@@ -22,7 +22,7 @@ export default () => {
 
   config.cluster = {
     listen: {
-      port: 3300,
+      port: 7002,
       hostname: "127.0.0.1"
     }
   };
