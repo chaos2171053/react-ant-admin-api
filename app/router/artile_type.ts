@@ -2,6 +2,9 @@ import { Application } from "egg";
 export default (app: Application) => {
   const { controller, router } = app;
   const apiRouter = router.namespace("/article/type");
+
+  const blogRouter = router.namespace("/blog/article/type"); // 前台blog接口
+
   /**
    * @api {post} /article/type/ 创建文章类别
    * @apiName CreateArticleType
@@ -70,7 +73,7 @@ export default (app: Application) => {
    *     }
    */
   apiRouter.get("/list", controller.articleType.queryList);
-
+  blogRouter.get("/list", controller.articleType.queryList);
   /**
    * @api {get} /article/type/:id 查找文章类别
    * @apiName QueryArticleType
