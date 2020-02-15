@@ -150,7 +150,7 @@ CREATE TABLE `admin_user` (
 -- Records of admin_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `admin_user` VALUES (1, 'admin1', 'admin1', 'http://image.landluck.com.cn/2020-01-10/11578634065020.jpeg', '363b4089e7829c514b33f966300d60ed', '15558155555', 1, 1, '', 'admin', '2020-01-10 03:13:48', '2020-01-28 09:07:07', NULL);
+INSERT INTO `admin_user` VALUES (1, 'admin', 'admin', 'http://cdn.buduangeng365.cn/2020-02-12/11581503871011.jpeg', '363b4089e7829c514b33f966300d60ed', '18664376937', 1, 1, '', 'admin', '2020-01-10 03:13:48', '2020-01-28 09:07:07', NULL);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
