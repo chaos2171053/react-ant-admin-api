@@ -49,18 +49,22 @@ export default class ArticleService extends BaseService<ArticleProps> {
       query.type_id = params.type_id;
     }
 
-    let queryResult = await this.findListByKey(query, params, options);
-
-    queryResult.list.forEach(
-      (article: ArticleProps & { type?: object | string }) => {
-        let articleObj = article.get({ plain: true }) as ArticleProps & {
-          type: { name: string; id: number };
-        };
-        const date = formatDate(articleObj.publish_at);
-        article.setDataValue("publish_at", date);
-        articleObj.type &&
-          articleObj.type.name &&
-          article.setDataValue("type_name", articleObj.type.name);
+    const queryResult = await this.findListByKey(query, params, options).then(
+      res => {
+        res.list.forEach(
+          (article: ArticleProps & { type?: object | string }) => {
+            let articleObj = article.get({ plain: true }) as ArticleProps & {
+              type: { name: string; id: number };
+            };
+            // const type_name = articleObj.type?.name ? articleObj.type?.name : '其他'
+            // article.setDataValue("type_name", type_name);
+            article.setDataValue(
+              "publish_at",
+              formatDate(articleObj.publish_at)
+            );
+          }
+        );
+        return res;
       }
     );
     return queryResult;
