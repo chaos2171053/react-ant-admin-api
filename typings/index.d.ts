@@ -33,7 +33,7 @@ export interface OssConfig {
 export interface LocalConfig {
   host?: string;
   dir: string;
-  prefix?: string
+  prefix?: string;
 }
 
 export interface QiniuConfig {
@@ -45,11 +45,11 @@ export interface QiniuConfig {
 
 export interface PageParams {
   page?: number;
-  size?: number;
+  pageSize?: number;
 }
 
 export interface PageInfo {
-  size: number;
+  pageSize: number;
   page: number;
   dataTotal: number;
   pageTotal: number;

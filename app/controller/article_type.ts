@@ -6,7 +6,7 @@ import { ArticleTypeProps } from "../model/article_type";
 export interface ArticleTypeSearchParams {
   name?: any;
   page?: number;
-  size?: number;
+  pageSize?: number;
 }
 
 class ArticleTypeController extends Controller {

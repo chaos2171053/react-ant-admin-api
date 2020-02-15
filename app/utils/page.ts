@@ -1,36 +1,36 @@
-import { PageParams, PageSql, PageInfo } from '../../typings';
-import { toNumber } from './index';
+import { PageParams, PageSql, PageInfo } from "../../typings";
+import { toNumber } from "./index";
 
 class Page {
   page: number;
-  size: number;
+  pageSize: number;
   dataTotal: number;
   pageTotal: number;
 
-  constructor({ page, size }: PageParams) {
+  constructor({ page, pageSize }: PageParams) {
     this.page = toNumber(page, 1);
-    this.size = toNumber(size, 10);
+    this.pageSize = toNumber(pageSize, 10);
   }
 
   setTotal(count: number) {
     this.dataTotal = count;
 
-    this.pageTotal = Math.ceil(count / this.size);
+    this.pageTotal = Math.ceil(count / this.pageSize);
   }
 
   buildOptions(): PageSql {
     return {
-      limit: this.size,
-      offset: (this.page - 1) * this.size,
+      limit: this.pageSize,
+      offset: (this.page - 1) * this.pageSize
     };
   }
 
   getData(): PageInfo {
     return {
       page: this.page,
-      size: this.size,
+      pageSize: this.pageSize,
       dataTotal: this.dataTotal,
-      pageTotal: this.pageTotal,
+      pageTotal: this.pageTotal
     };
   }
 }

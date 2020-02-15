@@ -30,7 +30,7 @@ export interface UserSearchParams {
   account?: any;
   mobile?: any;
   page?: number;
-  size?: number;
+  pageSize?: number;
 }
 
 class UserController extends Controller {

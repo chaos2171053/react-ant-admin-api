@@ -1,4 +1,4 @@
-import { Controller } from 'egg';
+import { Controller } from "egg";
 
 export interface MenuSearchQuery {
   id?: number;
@@ -7,11 +7,10 @@ export interface MenuSearchQuery {
   level?: number;
   parentId?: number;
   page?: number;
-  size?: number;
+  pageSize?: number;
 }
 
 class MenuController extends Controller {
-
   public async queryList() {
     const query: MenuSearchQuery = this.ctx.query;
 
@@ -20,8 +19,7 @@ class MenuController extends Controller {
     this.ctx.success(data);
   }
 
-  public async queryCascader () {
-
+  public async queryCascader() {
     const data = await this.service.menu.findCascader();
 
     this.ctx.success(data);
@@ -31,12 +29,12 @@ class MenuController extends Controller {
     const { ctx } = this;
 
     ctx.validate({
-      name: 'string',
-      icon: 'string',
-      url: 'string',
-      sort: 'number',
-      level: 'number',
-      parentId: 'number',
+      name: "string",
+      icon: "string",
+      url: "string",
+      sort: "number",
+      level: "number",
+      parentId: "number"
     });
 
     const data = await this.service.menu.createInstance(ctx.request.body);
@@ -52,16 +50,19 @@ class MenuController extends Controller {
     const { ctx } = this;
 
     ctx.validate({
-      id: 'number',
-      name: 'string',
-      icon: 'string',
-      url: 'string',
-      sort: 'number',
-      parentId: 'number',
-      level: 'number',
+      id: "number",
+      name: "string",
+      icon: "string",
+      url: "string",
+      sort: "number",
+      parentId: "number",
+      level: "number"
     });
 
-    const docs = await this.service.menu.updateById(ctx.request.body, ctx.request.body.id);
+    const docs = await this.service.menu.updateById(
+      ctx.request.body,
+      ctx.request.body.id
+    );
 
     if (docs) {
       return ctx.success();
@@ -75,9 +76,9 @@ class MenuController extends Controller {
 
     ctx.validate(
       {
-        id: /\d+/,
+        id: /\d+/
       },
-      ctx.params,
+      ctx.params
     );
 
     const docs = await this.service.menu.removeById(ctx.params.id);

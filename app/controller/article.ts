@@ -8,7 +8,7 @@ export interface ArticleSearchParams {
   title?: any;
   type_id?: number;
   page?: number;
-  size?: number;
+  pageSize?: number;
 }
 export interface ArticleParams {
   id: number;
