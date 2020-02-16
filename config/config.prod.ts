@@ -10,7 +10,7 @@ export default () => {
   };
 
   config.logger = {
-    dir: "../logs/react-ant-admin-api"
+    dir: "../logs/prod"
   };
   config.redis = {
     client: {
