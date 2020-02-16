@@ -1,0 +1,16 @@
+2020-02-16 19:07:33,299 INFO 33686 [egg:logger] init all loggers with options: {"dir":"/Users/chaos/learning/frontend/demos/react-ant-admin-api/logs/react-ant-admin-api","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"react-ant-admin-api-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2020-02-16 19:07:33,328 INFO 33686 [egg-multipart] file mode enable
+2020-02-16 19:07:33,328 INFO 33686 [egg-multipart] will save temporary files to "/var/folders/6q/qz2v39r54fs68hxps7mh9kwm0000gn/T/egg-multipart-tmp/react-ant-admin-api", cleanup job cron: "0 30 4 * * *"
+2020-02-16 19:07:33,654 INFO 33686 [egg-redis] server connecting redis://:***@127.0.0.1:6379/2
+2020-02-16 19:07:33,821 INFO 33686 [egg-static] starting static serve /public/ -> /Users/chaos/learning/frontend/demos/react-ant-admin-api/app/public
+2020-02-16 19:07:33,824 INFO 33686 [egg-security] use methodnoallow middleware
+2020-02-16 19:07:33,824 INFO 33686 [egg-security] use noopen middleware
+2020-02-16 19:07:33,825 INFO 33686 [egg-security] use nosniff middleware
+2020-02-16 19:07:33,825 INFO 33686 [egg-security] use xssProtection middleware
+2020-02-16 19:07:33,826 INFO 33686 [egg-security] use dta middleware
+2020-02-16 19:07:33,826 INFO 33686 [egg-security] compose 5 middlewares into one security middleware
+2020-02-16 19:07:33,857 INFO 33686 [egg:core] dump config after load, 6ms
+2020-02-16 19:07:33,870 INFO 33686 [egg-redis] client connect success
+2020-02-16 19:07:33,876 INFO 33686 [egg-redis] instance[0] status OK, client ready
+2020-02-16 19:07:33,878 INFO 33686 [egg-watcher:application] watcher start success
+2020-02-16 19:07:33,917 INFO 33686 [egg:core] dump config after ready, 6ms
