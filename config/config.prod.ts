@@ -9,9 +9,9 @@ export default () => {
     buffer: false
   };
 
-  // config.logger = {
-  //   dir: '/home/admin/logs/inyou-server',
-  // };
+  config.logger = {
+    dir: "../logs/react-ant-admin-api"
+  };
   config.redis = {
     client: {
       port: 6379,
