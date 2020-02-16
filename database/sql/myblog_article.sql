@@ -18,18 +18,18 @@
 --
 -- Table structure for table `article`
 --
-
+use `myblog`;
 DROP TABLE IF EXISTS `article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `article` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) DEFAULT NULL,
   `type_id` int(11) DEFAULT NULL,
   `content` text,
   `introduce` text,
-  `view_count` int(11) DEFAULT 0,
-   `publish_at` datetime DEFAULT NULL,
+  `view_count` int(11) DEFAULT '0',
+  `publish_at` datetime DEFAULT NULL,
   `creator` varchar(45) DEFAULT NULL,
   `modifier` varchar(45) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -48,4 +48,4 @@ CREATE TABLE `article` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-06 16:37:50
+-- Dump completed on 2020-02-16  0:05:30
