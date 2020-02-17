@@ -1,3 +1,3 @@
 export default {
-  baseUrl: "" // 全局api前缀
+  baseUrl: "/api" // 全局api前缀
 };

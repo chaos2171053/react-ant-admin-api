@@ -107,6 +107,9 @@ export default () => {
     origin: "*",
     allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS"
   };
+  config.logger = {
+    dir: "../logs/dev"
+  };
   // the return config will combines to EggAppConfig
   return {
     ...config

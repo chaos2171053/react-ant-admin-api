@@ -1,2 +1,0 @@
-2020-02-16 19:07:33,907 INFO 33686 [egg-sequelize](1ms) Executed (default): SELECT 1+1 AS result
-2020-02-16 19:07:33,909 INFO 33686 -----启动成功-----
